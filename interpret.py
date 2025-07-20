@@ -211,4 +211,3 @@ if __name__ == "__main__":
         result = interpret_command(cmd)
         print(f"Final result: {result}")
 
-# export GEMINI_API_KEY="AIzaSyBIwWnZSGUbeUeBkJb23180txP2rGvd3hU"
