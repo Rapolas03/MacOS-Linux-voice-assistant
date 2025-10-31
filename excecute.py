@@ -3,16 +3,16 @@ import platform
 
 def execute_command(command):
     """Execute the interpreted command"""
-    if not command or command.startswith("❌"):
-        print("❌ No valid command to execute")
+    if not command or command.startswith("x"):
+        print("x No valid command to execute")
         return
     
-    print(f"🚀 Executing: {command}")
+    print(f" Executing: {command}")
     
-    # Safety check for dangerous commands
+    # Safety check
     dangerous_patterns = ['rm -rf /', 'sudo rm -rf', 'format', 'del /f /q', '> /dev/null 2>&1']
     if any(pattern in command.lower() for pattern in dangerous_patterns):
-        print("⚠️ Dangerous command detected! Execution blocked.")
+        print(" Dangerous command detected! Execution blocked.")
         return
     
     try:
@@ -26,19 +26,19 @@ def execute_command(command):
         )
         
         if result.stdout:
-            print("✅ Output:")
+            print(" Output:")
             print(result.stdout)
         
         if result.stderr:
-            print("⚠️ Errors:")
+            print(" Errors:")
             print(result.stderr)
             
         if result.returncode != 0:
-            print(f"❌ Command failed with exit code: {result.returncode}")
+            print(f" Command failed with exit code: {result.returncode}")
         else:
-            print("✅ Command executed successfully")
+            print(" Command executed successfully")
             
     except subprocess.TimeoutExpired:
-        print("⏰ Command timed out after 30 seconds")
+        print(" Command timed out after 30 seconds")
     except Exception as e:
-        print(f"❌ Execution error: {e}")
+        print(f" Execution error: {e}")
