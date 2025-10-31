@@ -21,6 +21,6 @@ def text_to_speech(text):
         engine.runAndWait()
         
     except Exception as e:
-        print(f"❌ Text-to-speech error: {e}")
-        print(f"📝 Would have said: {text}")
+        print(f" Text-to-speech error: {e}")
+        print(f" Would have said: {text}")
 
