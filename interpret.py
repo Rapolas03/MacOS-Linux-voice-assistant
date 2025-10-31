@@ -10,7 +10,7 @@ if api_key:
     model = genai.GenerativeModel('gemini-1.5-flash')
 else:
     model = None
-    print("⚠️ GEMINI_API_KEY not found. Using local fallback only.")
+    print(" GEMINI_API_KEY not found. Using local fallback only.")
 
 def get_system_context():
     """Get system-specific context"""
@@ -79,11 +79,11 @@ def local_fallback(user_input):
             
             if "home" in user_lower:
                 command = f"mkdir ~/{dir_name}"
-                print(f"✅ Matched home directory creation: {command}")
+                print(f"Matched home directory creation: {command}")
                 return command
             else:
                 command = f"mkdir {dir_name}"
-                print(f"✅ Matched directory creation: {command}")
+                print(f" Matched directory creation: {command}")
                 return command
         
         # Other common patterns
@@ -139,7 +139,7 @@ def local_fallback(user_input):
         # Try other patterns
         for pattern, command in patterns.items():
             if re.search(pattern, user_lower):
-                print(f"✅ Matched pattern: {command}")
+                print(f" Matched pattern: {command}")
                 return command
     
     # Windows commands
@@ -147,7 +147,7 @@ def local_fallback(user_input):
         if re.search(r"creat.*director", user_lower):
             dir_name = extract_directory_name(user_lower)
             command = f"mkdir {dir_name}"
-            print(f"✅ Matched Windows directory creation: {command}")
+            print(f" Matched Windows directory creation: {command}")
             return command
             
         patterns = {
@@ -166,11 +166,11 @@ def local_fallback(user_input):
         
         for pattern, command in patterns.items():
             if re.search(pattern, user_lower):
-                print(f"✅ Matched pattern: {command}")
+                print(f" Matched pattern: {command}")
                 return command
     
     # Default fallback
-    print("🔄 No specific pattern matched, using default")
+    print(" No specific pattern matched, using default")
     if system in ["Darwin", "Linux"]:
         return "ls -la"
     else:
@@ -183,16 +183,16 @@ def interpret_command(user_input):
     # Try Gemini first
     if model:
         result = interpret_with_gemini(user_input)
-        if result and not result.startswith("❌"):
-            print("✅ Using Gemini API")
+        if result and not result.startswith("X"):
+            print("Using Gemini API")
             return result
         else:
-            print("❌ Gemini API failed, using local fallback")
+            print(" Gemini API failed, using local fallback")
     else:
-        print("❌ Gemini not available, using local fallback")
+        print(" Gemini not available, using local fallback")
     
     # Use local fallback
-    print("🔄 Using local fallback")
+    print(" Using local fallback")
     return local_fallback(user_input)
 
 # Test function
